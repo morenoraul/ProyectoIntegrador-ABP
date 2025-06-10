@@ -14,29 +14,6 @@ Aplicación web interactiva que actúa como explorador de productos, permitiendo
 - **DummyJSON** - Fuente de datos de productos
 - **Recharts** - Visualizaciones de datos
 
-## 🚀 Instalación y Uso
-
-### 1. Clonar el repositorio
-```bash
-git clone [URL_DEL_REPOSITORIO]
-cd proyecto-abp-productos
-```
-
-### 2. Instalar dependencias
-```bash
-npm install
-```
-
-### 3. Ejecutar la aplicación
-```bash
-npm start
-```
-
-### 4. Abrir en el navegador
-```
-http://localhost:3000
-```
-
 ## 📅 Desarrollo por Semanas
 
 ### 🔹 Semana 1 - React + Axios + Búsqueda
