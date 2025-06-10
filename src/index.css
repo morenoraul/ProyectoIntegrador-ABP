@@ -1,44 +1,40 @@
+/* Modo claro por defecto */
 .app {
+    background-color: white;
+    color: black;
     font-family: Verdana, Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: white;
-    color: black;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.dark-mode {
-    background-color: #181818;
-    color: #f1f1f1;
-    transition: background-color 0.3s, color 0.3s;
+/* Modo oscuro */
+.app.dark-mode {
+    background-color: #18181b !important;
+    color: #f3f4f6 !important;
 }
 
-.dark-mode {
-  background-color: #18181b !important;
-  color: #f3f4f6 !important;
+.app.dark-mode .product-list {
+    background-color: #27272a !important;
+    color: #f3f4f6 !important;
 }
 
-.dark-mode .product-list  {
-  background-color: #27272a !important;
-  color: #f3f4f6 !important;
+.app.dark-mode .product-list .border {
+    background-color: #27272a !important;
+    color: #f3f4f6 !important;
+    border: #4b5563 1px solid !important;
 }
 
-.dark-mode .product-list .border {
-  background-color: #27272a !important;
-  color: #f3f4f6 !important;
-  border: #4b5563 1px solid !important; /* Cambié el color del borde */
-}
-
-.dark-mode .product-title {
+.app.dark-mode .product-title {
     color: rgb(195, 153, 99) !important;
 }
 
-.dark-mode .product-price {
+.app.dark-mode .product-price {
     color: azure !important;
 }
 
-.dark-mode .stats-panel {
-  background-color: #23272f !important;
-  color: #f3f4f6 !important;
+.app.dark-mode .stats-panel {
+    background-color: #23272f !important;
+    color: #f3f4f6 !important;
 }
