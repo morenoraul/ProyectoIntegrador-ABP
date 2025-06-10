@@ -6,10 +6,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const labels = ['Precio Minimo', 'Precio Maximo'];
 
-
-// Exportación del componente corregida y paleta de colores azul aplicada a los gráficos
-
-export default function StatsPanel(props) {
+function StatsPanel(props) {
     // Gráfico de barras: cantidad de productos por categoría
     const barLabels = props.categories || [];
     const barData = {
@@ -18,7 +15,7 @@ export default function StatsPanel(props) {
             {
                 label: 'Cantidad',
                 data: barLabels.map(cat => props.products.filter(p => p.category === cat).length),
-                backgroundColor: 'rgba(30, 64, 175, 0.5)', // azul
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
             },
         ],
     };
@@ -30,8 +27,7 @@ export default function StatsPanel(props) {
         },
         scales: { y: { beginAtZero: true } },
     };
-
-    // Gráfico de líneas: evolución de precios (simulada)
+  // Gráfico de líneas: evolución de precios (simulada)
     const lineLabels = props.filteredProducts.slice(0, 10).map((p, idx) => `M${idx + 1}`);
     const lineData = {
         labels: lineLabels,
@@ -40,8 +36,8 @@ export default function StatsPanel(props) {
                 label: 'Precio',
                 data: props.filteredProducts.slice(0, 10).map(p => p.price),
                 fill: false,
-                borderColor: 'rgba(30, 64, 175, 0.7)', // azul
-                backgroundColor: 'rgba(30, 64, 175, 0.3)', // azul claro
+                borderColor: 'rgba(255, 99, 132, 0.7)',
+                backgroundColor: 'rgba(255, 99, 132, 0.3)',
                 tension: 0.3,
             },
         ],
@@ -54,21 +50,19 @@ export default function StatsPanel(props) {
         },
         scales: { y: { beginAtZero: true } },
     };
-
-    // Gráfico de barras min/max precios
-    const minMaxLabels = ['Precio Minimo', 'Precio Maximo'];
-    const minMaxData = {
-        labels: minMaxLabels,
+    // Gráfico de barras min/max precios (ya existente)
+    const data = {
+        labels,
         datasets: [
             {
                 label: 'Precios',
                 data: [props.min, props.max],
-                backgroundColor: ['rgba(30, 64, 175, 0.5)', 'rgba(59, 130, 246, 0.5)'], // azules
+                backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(75, 192, 192, 0.5)'],
                 borderRadius: 8,
             },
         ],
     };
-    const minMaxOptions = {
+    const options = {
         responsive: true,
         plugins: {
             legend: { position: 'top' },
@@ -76,8 +70,7 @@ export default function StatsPanel(props) {
         },
         scales: { y: { beginAtZero: true } },
     };
-
-    // Pie chart: proporción de productos según stock
+     // Pie chart: proporción de productos según stock
     const stockRanges = [
         { name: 'Stock ≤ 20', min: 0, max: 20 },
         { name: '21-50', min: 21, max: 50 },
@@ -95,10 +88,7 @@ export default function StatsPanel(props) {
                 label: 'Stock',
                 data: pieValues,
                 backgroundColor: [
-                    '#1e40af', // azul oscuro
-                    '#2563eb', // azul medio
-                    '#60a5fa', // azul claro
-                    '#93c5fd'  // azul muy claro
+                    '#0088FE', '#00C49F', '#FFBB28', '#FF8042'
                 ],
             },
         ],
@@ -111,41 +101,39 @@ export default function StatsPanel(props) {
         },
     };
 
+
     return (
         <div className="pt-5 text-sm">
-            <p>Total de Productos: <span className="text-blue-800">{props.total}</span></p>
-            <p>Total de Productos con stock &gt; 50: <span className="text-blue-800">{props.totalStockMayor50}</span></p>
-            <p>Precio Promedio: <span className="text-blue-800">{props.promedioPrecio}</span></p>
-            <p>Precio Maximo: <span className="text-blue-800">${props.max}</span></p>
-            <p>Precio Mínimo: <span className="text-blue-800">${props.min}</span></p>
-            <p>Promedio de rating general (categoría filtrada): <span className="text-blue-800">{props.promedioRating}</span></p>
-            <p>Producto más caro:  <span className="text-blue-800">{props.maxName} (${props.max})</span></p>
-            <p>Producto más Barato:  <span className="text-blue-800">{props.minName} (${props.min})</span></p>
-            <p>Promedio de Descuento: <span className="text-blue-800">{props.promedioDescuento}%</span></p>
-            <p>Producto con mejor valoración: <span className="text-blue-800">{props.maxRatingTitle} {props.maxRatingValue}%</span></p>
-            <p>Cantidad de productos en la categoría: <span className="text-blue-800">{props.cantidadPorCategoria}</span></p>
-            <p>Cantidad de productos con stock &gt; 50: <span className="text-blue-800">{props.cantidadStockMayor50}</span></p>
-            <p>Cantidad de productos con rating &gt; 4.5: <span className="text-blue-800">{props.cantidadRatingMayor45}</span></p>
+           
+          
+            <p className="mt-4">Cantidad de productos en la categoría: <span className="text-pink-800">{props.cantidadPorCategoria}</span></p>
+            <p>Precio Total: <span className="text-pink-800">{props.totalPrice}</span></p>
+            <p>Precio Promedio: <span className="text-pink-800">{props.promedioPrecio}</span></p>
+            <p>Promedio de rating (categoría filtrada): <span className="text-pink-800">{props.promedioRating}</span></p>
+            <p>Producto más caro:  <span className="text-pink-800">{props.maxName} (${props.max})</span></p>
+            <p>Producto más Barato:  <span className="text-pink-800">{props.minName} (${props.min})</span></p>
+            <p>Producto Título mayor a 20 caracteres: <span className="text-pink-800">{props.mayor20}</span></p>
+            <p>Promedio de Descuento: <span className="text-pink-800">{props.promedioDescuento}%</span></p>
+            <p>Producto con mejor valoración: <span className="text-pink-800">{props.maxRatingTitle} {props.maxRatingValue}%</span></p>
+            <p>Cantidad de productos con stock &gt; 50: <span className="text-pink-800">{props.cantidadStockMayor50}</span></p>
+            <p>Cantidad de productos con rating &gt; 4.5: <span className="text-pink-800">{props.cantidadRatingMayor45}</span></p>
             {props.promedioPrecioCategoriaFiltrada && props.promedioPrecioCategoriaFiltrada !== "-" && (
-                <p>Precio promedio de la categoría{" "}
-                    <span className="text-blue-800">${props.promedioPrecioCategoriaFiltrada}</span>
-                </p>
+                <p>Precio promedio de la categoría <span className="text-pink-800">${props.promedioPrecioCategoriaFiltrada}</span></p>
             )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                <div>
-                    <Bar data={barData} options={barOptions} />
-                </div>
-                <div>
-                    <Line data={lineData} options={lineOptions} />
-                </div>
-                <div>
-                    <Bar data={minMaxData} options={minMaxOptions} />
-                </div>
-                <div>
-                    <Pie data={pieData} options={pieOptions} />
-                </div>
+            <h1>Graficos</h1>
+              {/* Gráfico de barras: cantidad de productos por categoría */}
+            <div className="mt-8">
+                <Bar options={barOptions} data={barData} />
+            </div>
+              {/* Gráfico de líneas: evolución de precios (simulada) */}
+            <div className="mt-8">
+                <Line options={lineOptions} data={lineData} />
+            </div>
+            <div className="mt-8 mt-8 max-w-s mx-auto">
+                <Pie options={pieOptions} data={pieData} />
             </div>
         </div>
     );
 }
+
+export default StatsPanel;
